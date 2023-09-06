@@ -73,7 +73,7 @@ Show2dArray(myArray);*/
 5 2 6 7
 Программа считает сумму элементов в каждой строке и выдаёт номер строки с наименьшей суммой элементов: 1 строка*/
 
-/*int[,] CreateRandom2dArray() // Функция по созданию двумерного массива
+int[,] CreateRandom2dArray() // Функция по созданию двумерного массива
 {
     Console.Write("Input a quartity of rows: ");
     int rows = Convert.ToInt32(Console.ReadLine());
@@ -102,32 +102,35 @@ void Show2dArray(int[,] array)
     }
 }
 
-void SortLine(int[,] array)
+void SearchLineMinSum(int[,] array)
 {
+    int minSum = int.MaxValue; // Инициализация минимальной суммы как бесконечность
+    int minSumRowIndex = 0; // Индекс строки с минимальной суммой
+    
+    int rows = array.GetLength(0); // Количество строк в массиве
+    int columns = array.GetLength(1); // Количество столбцов в массиве
     for (int i = 0; i < array.GetLength(0); i++)
     {
+        int rowSum = 0; // Сумма элементов строки
         for (int j = 0; j < array.GetLength(1); j++)
         {
-            for (int k = 0; k < array.GetLength(1) - 1; k++)
-            {
-                if (array[i, k] < array[i, k + 1])
-                {
-                    int temp = array[i, k];
-                    array[i, k] = array[i, k + 1];
-                    array[i, k + 1] = temp;
-
-                }
-            }
-
+            rowSum += array[i, j];
+        }
+        if (rowSum < minSum) // Если текущая сумма меньше минимальной суммы
+        {
+            minSum = rowSum; // Обновляем минимальную сумму
+            minSumRowIndex = i+1; // Обновляем индекс строки с минимальной суммой
         }
     }
+    Console.Write($"Row with the smallest sum of elements: " + minSumRowIndex);
 }
 int[,] myArray = CreateRandom2dArray();
 Show2dArray(myArray);
-Console.WriteLine();
-SortLine(myArray);
-Show2dArray(myArray);
-*/
+SearchLineMinSum(myArray);
+
+
+
+
 
 /*Задача 58: Задайте две матрицы. Напишите программу, которая будет находить произведение двух матриц.
 Например, даны 2 матрицы:
