@@ -72,7 +72,7 @@ Show2dArray(myArray);*/
 8 4 2 4
 5 2 6 7
 Программа считает сумму элементов в каждой строке и выдаёт номер строки с наименьшей суммой элементов: 1 строка*/
-/*
+
 int[,] CreateRandom2dArray() // Функция по созданию двумерного массива
 {
     Console.Write("Input a quartity of rows: ");
@@ -127,7 +127,7 @@ void SearchLineMinSum(int[,] array)
 int[,] myArray = CreateRandom2dArray();
 Show2dArray(myArray);
 SearchLineMinSum(myArray);
-*/
+
 
 
 
@@ -145,7 +145,7 @@ SearchLineMinSum(myArray);
 если число столбцов в первом сомножителе равно числу строк во втором
 */
 
-/*
+
 int[,] CreateRandom2dArray() // Функция по созданию двумерного массива
 {
     Console.Write("Input a quantity of rows: ");
@@ -201,7 +201,7 @@ Show2dArray(myArray2);
 
 int[,] resultArray = MultiplicationArrays(myArray1, myArray2);
 Show2dArray(resultArray);
-*/
+
 
 /*Задача 60. ...Сформируйте трёхмерный массив из неповторяющихся двузначных чисел. Напишите программу, которая будет построчно 
 выводить массив, добавляя индексы каждого элемента.
@@ -210,7 +210,7 @@ Show2dArray(resultArray);
 34(1,0,0) 41(1,1,0)
 27(0,0,1) 90(0,1,1)
 26(1,0,1) 55(1,1,1)*/
-/*
+
 int[,,] CreateRandom3dArray() // Функция по созданию трехмерного массива
 {
     Console.Write("Input a quantity of rows: ");
@@ -275,7 +275,7 @@ void Show3dArray(int[,,] array)
 }
     int[,,] myArray = CreateRandom3dArray();
     Show3dArray(myArray);
-*/
+
 
 /*Задача 62. Напишите программу, которая заполнит спирально массив 4 на 4.
 Например, на выходе получается вот такой массив:
