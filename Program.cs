@@ -145,7 +145,7 @@ SearchLineMinSum(myArray);
 если число столбцов в первом сомножителе равно числу строк во втором
 */
 
-
+/*
 int[,] CreateRandom2dArray() // Функция по созданию двумерного массива
 {
     Console.Write("Input a quantity of rows: ");
@@ -201,7 +201,7 @@ Show2dArray(myArray2);
 
 int[,] resultArray = MultiplicationArrays(myArray1, myArray2);
 Show2dArray(resultArray);
-
+*/
 
 /*Задача 60. ...Сформируйте трёхмерный массив из неповторяющихся двузначных чисел. Напишите программу, которая будет построчно 
 выводить массив, добавляя индексы каждого элемента.
@@ -213,26 +213,50 @@ Show2dArray(resultArray);
 /*
 int[,,] CreateRandom3dArray() // Функция по созданию трехмерного массива
 {
-    int length = 2;
+    Console.Write("Input a quantity of rows: ");
+    int rows = Convert.ToInt32(Console.ReadLine());
+    Console.Write("Input a quantity of columns: ");
+    int columns = Convert.ToInt32(Console.ReadLine());
+    Console.Write("Input a quantity of depth: ");
+    int depth = Convert.ToInt32(Console.ReadLine());
+
     int minValue = 10;
-    int maxValue = 100;
+    int maxValue = 99;
 
-    int[,,] array = new int[length, length, length];
+    int[,,] array = new int[rows, columns, depth];
 
-    for (int i = 0; i < length; i++)
-        for (int j = 0; j < length; j++)
-            for (int k = 0; k < length; k++)
+    for (int i = 0; i < rows; i++)
+        for (int j = 0; j < columns; j++)
+            for (int k = 0; k < depth; k++)
             {
-                int number = 0;
+                int num = 0;
                 do
                 {
-                    number = new Random().Next(minValue, maxValue);
-                } while (CheckNumber(number, array));
+                    num = new Random().Next(minValue, maxValue + 1);
+                } while (ControlNumber(num, array, i, j, k));
 
-                array[i, j, k] = number;
+                array[i, j, k] = num;
             }
 
     return array;
+}
+
+bool ControlNumber(int number, int[,,] array, int rows, int columns, int depth)
+{
+    for (int i = 0; i < rows; i++)
+    {
+        for (int j = 0; j < columns; j++)
+        {
+            for (int k = 0; k < depth; k++)
+            {
+                if (array[i, j, k] == number)
+                {
+                    return true;
+                }
+            }
+        }
+    }
+    return false;
 }
 
 void Show3dArray(int[,,] array)
@@ -249,25 +273,9 @@ void Show3dArray(int[,,] array)
     }
     Console.WriteLine();
 }
-
-bool CheckNumber(int num, int[,,] arr)
-{
-    bool result = false;
-
-    for (int i = 0; i < arr.GetLength(0); i++)
-        for (int j = 0; j < arr.GetLength(1); j++)
-            for (int k = 0; k < arr.GetLength(2); k++)
-                if (num == arr[i, j, k])
-                    result = true;
-
-    return result;
-
-}
-
-int[,,] myArray = CreateRandom3dArray();
-Show3dArray(myArray);
+    int[,,] myArray = CreateRandom3dArray();
+    Show3dArray(myArray);
 */
-
 
 /*Задача 62. Напишите программу, которая заполнит спирально массив 4 на 4.
 Например, на выходе получается вот такой массив:
@@ -275,3 +283,80 @@ Show3dArray(myArray);
 12 13 14 05
 11 16 15 06
 10 09 08 07*/
+
+int[,] CreateRandom2dArray()
+{
+    Console.WriteLine("Input quantity of rows: ");
+    int rows = Convert.ToInt32(Console.ReadLine());
+    Console.WriteLine("Input quantity of columns: ");
+    int columns = Convert.ToInt32(Console.ReadLine());
+
+    int[,] array = new int[rows, columns];
+
+    int number = 1;
+    int maxValue = rows * columns;
+    int minRows = 0;
+    int minColumns = 0;
+    int maxRows = rows - 1;
+    int maxColumns = columns - 1;
+
+    while (number <= maxValue)
+    {
+        if (maxColumns - minColumns > 0)
+        {
+            for (int j = minColumns; j <= maxColumns; j++)
+            {
+                array[minRows, j] = number;
+                number = number + 1;
+            }
+            minRows = minRows + 1;
+        }
+
+        if (maxRows - minRows > 0)
+        {
+            for (int i = minRows; i <= maxRows; i++)
+            {
+                array[i, maxColumns] = number;
+                number = number + 1;
+            }
+            maxColumns = maxColumns - 1;
+        }
+
+        if (maxColumns - minColumns > 0)
+        {
+            for (int j = maxColumns; j >= minColumns; j--)
+            {
+                array[maxRows, j] = number;
+                number = number + 1;
+            }
+            maxRows = maxRows - 1;
+        }
+
+        if (maxRows - minRows > 0)
+        {
+            for (int i = maxRows; i >= minRows; i--)
+            {
+                array[i, minColumns] = number;
+                number = number + 1;
+            }
+            minColumns = minColumns + 1;
+        }
+    }
+
+    return array;
+}
+
+void Show2dArray(int[,] array)
+{
+    for (int i = 0; i < array.GetLength(0); i++)
+    {
+        for (int j = 0; j < array.GetLength(1); j++)
+            Console.Write(array[i, j].ToString("D3") + " ");
+
+        Console.WriteLine();
+    }
+    Console.WriteLine();
+}
+
+int[,] myArray = CreateRandom2dArray();
+Show2dArray(myArray);
